@@ -91,3 +91,18 @@ resource "helm_release" "argocd" {
     file("argocd/application.yaml")
   ]
 }
+
+output "argocd_port_forward_cmd" {
+#  sensitive = true
+  value = "kubectl port-forward svc/argocd-server -n argocd 8080:443"
+}
+
+output "argocd_default_admin_user_cmd" {
+  #  sensitive = true
+  value = "admin"
+}
+
+/*output "argocd_admin_secret_cmd" {
+  #  sensitive = true
+  value = "kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d"
+}*/
